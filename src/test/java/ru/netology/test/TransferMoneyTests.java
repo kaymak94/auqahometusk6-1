@@ -30,7 +30,7 @@ public class TransferMoneyTests {
     void shouldTransferMoneyFromFirstToSecondCard() {
 
         int value = 10;
-        String cardNumber = DataHelper.getFirstCardNumber().getCardNumber();
+        String cardNumber = String.valueOf(DataHelper.getFirstCardNumber());
         val dashboardPage = new DashboardPage();
         var firstCardBalance = dashboardPage.getFirstCardBalance();
         var secondCardBalance = dashboardPage.getSecondCardBalance();
@@ -39,8 +39,9 @@ public class TransferMoneyTests {
         transferPage.toDoTransfer(value, cardNumber);
         var firstCardBalanceNew = dashboardPage.getFirstCardBalance();
         var secondCardBalanceNew = dashboardPage.getSecondCardBalance();
-        Assertions.assertEquals(secondCardBalance - value, secondCardBalanceNew);
-        Assertions.assertEquals(firstCardBalance + value, firstCardBalanceNew);
+        Assertions.assertEquals(firstCardBalance - value, firstCardBalanceNew);
+        Assertions.assertEquals(secondCardBalance + value, secondCardBalanceNew);
+
     }
 
 
@@ -48,8 +49,8 @@ public class TransferMoneyTests {
     @Test
     void shouldTransferMoneyFromSecondToFirstCard() {
 
-        int value = 600;
-        String cardNumber = DataHelper.getSecondCardNumber().getCardNumber();
+        int value = 10;
+        String cardNumber = String.valueOf(DataHelper.getSecondCardNumber());
         val dashboardPage = new DashboardPage();
         var firstCardBalance = dashboardPage.getFirstCardBalance();
         var secondCardBalance = dashboardPage.getSecondCardBalance();
@@ -58,15 +59,16 @@ public class TransferMoneyTests {
         transferPage.toDoTransfer(value, cardNumber);
         var firstCardBalanceNew = dashboardPage.getFirstCardBalance();
         var secondCardBalanceNew = dashboardPage.getSecondCardBalance();
-        Assertions.assertEquals(firstCardBalance - value, firstCardBalanceNew);
-        Assertions.assertEquals(secondCardBalance + value, secondCardBalanceNew);
+        Assertions.assertEquals(secondCardBalance - value, secondCardBalanceNew);
+        Assertions.assertEquals(firstCardBalance + value, firstCardBalanceNew);
+
     }
 
     @Test
     void shouldTransferMoneyFromSecondToFirstCardMoreLimit() {
 
         int value = 11_000;
-        String cardNumber = DataHelper.getSecondCardNumber().getCardNumber();
+        String cardNumber = String.valueOf(DataHelper.getSecondCardNumber());
         val dashboardPage = new DashboardPage();
         var firstCardBalance = dashboardPage.getFirstCardBalance();
         var secondCardBalance = dashboardPage.getSecondCardBalance();
